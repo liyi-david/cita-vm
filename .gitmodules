@@ -1,3 +1,6 @@
 [submodule "tests/jsondata"]
 	path = tests/jsondata
 	url = https://github.com/ethereum/tests
+[submodule "coqvm"]
+	path = coqvm
+	url = https://github.com/liyi-david/mlevm.git
