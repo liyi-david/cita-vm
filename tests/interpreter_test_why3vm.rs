@@ -126,7 +126,8 @@ fn test_json_path(p: &str) {
 
 #[test]
 fn test_why3_evm() {
-    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/add0.json");
+    //test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest");
     //test_json_path(r"./tests/jsondata/VMTests/vmBitwiseLogicOperation");
     //test_json_path(r"./tests/jsondata/VMTests/vmBlockInfoTest");
     //test_json_path(r"./tests/jsondata/VMTests/vmEnvironmentalInfo");

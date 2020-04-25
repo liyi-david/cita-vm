@@ -1,3 +1,5 @@
+extern crate serde_json;
+
 use super::common;
 use super::err;
 use super::ext;
@@ -6,6 +8,14 @@ use super::opcodes;
 use super::stack;
 use ethereum_types::*;
 use std::cmp;
+use std::str;
+use std::io::Write;
+
+use serde_json::Error;
+use serde_json::map::Map;
+
+use std::process::{Command, Stdio};
+use std::env::var;
 
 #[derive(Clone, Default)]
 pub struct Context {
@@ -181,7 +191,65 @@ impl Interpreter {
     }
 
     pub fn run_why3(&mut self) -> Result<InterpreterResult, err::Error> {
-        return Err(err::Error::OutOfStack)
+        let this = &mut *self;
+        let why3evm_path = var("WHY3EVM")
+            .expect("should set the environment variable WHY3EVM first!");
+        let server_path = format!("{}/server", why3evm_path);
+
+        let mut cmd = 
+            Command::new(server_path)
+                .stdin(Stdio::piped())
+                .stdout(Stdio::piped())
+                .stderr(Stdio::piped())
+                .spawn()
+                .expect("failed to run the why3 evm server");
+
+        let codebytes: Vec<String> = this.params.contract.code_data
+            .iter()
+            .map(|byte| format!("{:02X}", byte))
+            .collect();
+
+        let code: String = codebytes.join("");
+
+        let feed = format!("{{\"code\": \"{}00\", \"gas\": \"{}\"}}", code, this.params.gas);
+        println!("command input: {}", feed);
+
+        cmd.stdin.as_mut()
+                 .expect("failed to open STDIN")
+                 .write(feed.as_bytes())
+                 .expect("failed to write to STDIN");
+
+        let output = cmd.wait_with_output().expect("failed to read from OUTPUT");
+        let stdout = str::from_utf8(&output.stdout).unwrap();
+        let stderr = str::from_utf8(&output.stderr).unwrap();
+        println!("command output: {}\n", stdout);
+
+        // parse return value from the why3 EVM server
+        let v: serde_json::Value = serde_json::from_str(stdout).unwrap();
+
+        // update value
+        let ret_storage : &Map<String, serde_json::Value> =
+            v["result"]["storage"].as_object().unwrap();
+
+        for (_addr, _retval) in ret_storage {
+            let addr = H256::from(common::hex_decode(_addr).unwrap().as_slice());
+            let retval = H256::from(common::hex_decode(_retval.as_str().unwrap()).unwrap().as_slice());
+
+            this.data_provider.set_storage(
+                &this.params.address,
+                addr,
+                retval
+            );
+        }
+
+        // update gas
+        this.gas = v["result"]["gas"].as_str().unwrap().parse().unwrap();
+
+        return Ok(InterpreterResult::Revert(
+            this.return_data.clone(),
+            this.gas,
+            this.logs.clone(),
+        ));
     }
 
     #[allow(clippy::cyclomatic_complexity)]
