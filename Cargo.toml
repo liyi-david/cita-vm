@@ -11,12 +11,12 @@ serde_derive = "1.0"
 serde_json = "1.0"
 hex = "0.3"
 evm = { path="./evm" }
-coqvm = { path="./coqvm" }
+why3evm = { path="./why3evm" }
 
 [workspace]
 members = [
     "evm",
     "ewasm",
     "state",
-    "coqvm"
+    "why3evm"
 ]

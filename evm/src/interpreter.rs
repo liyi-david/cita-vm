@@ -180,6 +180,10 @@ impl Interpreter {
         }
     }
 
+    pub fn run_why3(&mut self) -> Result<InterpreterResult, err::Error> {
+        return Err(err::Error::OutOfStack)
+    }
+
     #[allow(clippy::cyclomatic_complexity)]
     pub fn run(&mut self) -> Result<InterpreterResult, err::Error> {
         let this = &mut *self;

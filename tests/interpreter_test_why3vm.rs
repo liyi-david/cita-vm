@@ -75,7 +75,7 @@ fn test_json_file(p: &str) {
         }
 
         // Doit
-        let r = it.run();
+        let r = it.run_why3();
 
         match r {
             Ok(data) => {
@@ -125,16 +125,16 @@ fn test_json_path(p: &str) {
 }
 
 #[test]
-fn test_vm() {
+fn test_why3_evm() {
     test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest");
-    test_json_path(r"./tests/jsondata/VMTests/vmBitwiseLogicOperation");
-    test_json_path(r"./tests/jsondata/VMTests/vmBlockInfoTest");
-    test_json_path(r"./tests/jsondata/VMTests/vmEnvironmentalInfo");
-    test_json_path(r"./tests/jsondata/VMTests/vmIOandFlowOperations");
-    test_json_path(r"./tests/jsondata/VMTests/vmLogTest");
-    test_json_path(r"./tests/jsondata/VMTests/vmPushDupSwapTest");
-    test_json_path(r"./tests/jsondata/VMTests/vmRandomTest");
-    test_json_path(r"./tests/jsondata/VMTests/vmSha3Test");
-    test_json_path(r"./tests/jsondata/VMTests/vmSystemOperations");
-    test_json_path(r"./tests/jsondata/VMTests/vmTests");
+    //test_json_path(r"./tests/jsondata/VMTests/vmBitwiseLogicOperation");
+    //test_json_path(r"./tests/jsondata/VMTests/vmBlockInfoTest");
+    //test_json_path(r"./tests/jsondata/VMTests/vmEnvironmentalInfo");
+    //test_json_path(r"./tests/jsondata/VMTests/vmIOandFlowOperations");
+    //test_json_path(r"./tests/jsondata/VMTests/vmLogTest");
+    //test_json_path(r"./tests/jsondata/VMTests/vmPushDupSwapTest");
+    //test_json_path(r"./tests/jsondata/VMTests/vmRandomTest");
+    //test_json_path(r"./tests/jsondata/VMTests/vmSha3Test");
+    //test_json_path(r"./tests/jsondata/VMTests/vmSystemOperations");
+    //test_json_path(r"./tests/jsondata/VMTests/vmTests");
 }
