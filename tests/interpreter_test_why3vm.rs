@@ -127,15 +127,23 @@ fn test_json_path(p: &str) {
 #[test]
 fn test_why3_evm() {
     test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/add0.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/add1.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/add2.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/add3.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/add4.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/sub0.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/sub1.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/sub2.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/sub3.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/sub4.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/addmod0.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/addmod1.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/mul0.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/mul1.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/mul2.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/mul3.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/mul4.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/mul5.json");
+    test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest/mul6.json");
     //test_json_path(r"./tests/jsondata/VMTests/vmArithmeticTest");
-    //test_json_path(r"./tests/jsondata/VMTests/vmBitwiseLogicOperation");
-    //test_json_path(r"./tests/jsondata/VMTests/vmBlockInfoTest");
-    //test_json_path(r"./tests/jsondata/VMTests/vmEnvironmentalInfo");
-    //test_json_path(r"./tests/jsondata/VMTests/vmIOandFlowOperations");
-    //test_json_path(r"./tests/jsondata/VMTests/vmLogTest");
-    //test_json_path(r"./tests/jsondata/VMTests/vmPushDupSwapTest");
-    //test_json_path(r"./tests/jsondata/VMTests/vmRandomTest");
-    //test_json_path(r"./tests/jsondata/VMTests/vmSha3Test");
-    //test_json_path(r"./tests/jsondata/VMTests/vmSystemOperations");
-    //test_json_path(r"./tests/jsondata/VMTests/vmTests");
 }

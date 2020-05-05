@@ -222,7 +222,8 @@ impl Interpreter {
         let output = cmd.wait_with_output().expect("failed to read from OUTPUT");
         let stdout = str::from_utf8(&output.stdout).unwrap();
         let stderr = str::from_utf8(&output.stderr).unwrap();
-        println!("command output: {}\n", stdout);
+        println!("command stdout: {}", stdout);
+        println!("command stderr: {}", stderr);
 
         // parse return value from the why3 EVM server
         let v: serde_json::Value = serde_json::from_str(stdout).unwrap();
